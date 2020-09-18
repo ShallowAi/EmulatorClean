@@ -1,0 +1,39 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo               À×µçÄ£ÄâÆ÷4 ¾»»¯
+echo               Author: ShallowAi
+echo               52pojie.cn
+echo ****************************************
+echo ÇëÊäÈë À×µçÄ£ÄâÆ÷4 °²×°Î»ÖÃ, ²¢ÔËĞĞÀ×µçÄ£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı D:\leidian\LDPlayer
+set /p dir=°²×°Î»ÖÃ£º
+echo À×µçÄ£ÄâÆ÷°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÂğ£¿
+pause
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÒÑÔËĞĞ!
+pause
+tasklist | find /i "dnplayer.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+cd bin
+adb connect 127.0.0.1:5555
+adb -s emulator-5554 remount
+echo ÕıÔÚÎª À×µçÄ£ÄâÆ÷ °²×°´¿¾» NovaLauncher ×ÀÃæ
+adb -s emulator-5554 install nova.apk
+echo ÕıÔÚ½ûÓÃ À×µçÄ£ÄâÆ÷ ÍÆ¹ã×ÀÃæ
+adb -s emulator-5554 shell pm disable com.android.launcher3
+echo ÕıÔÚĞ¶ÔØ À×µçÄ£ÄâÆ÷ Ó¦ÓÃÉÌµê
+adb -s emulator-5554 shell rm -rf /system/priv-app/ldAppStore
+echo Çë¹Ø±ÕÕıÔÚÔËĞĞµÄÄ£ÄâÆ÷.
+taskkill /f /im dnplayer.exe
+echo ÕıÔÚÉ¾³ı²¢½ûÓÃ À×µçÄ£ÄâÆ÷ Æô¶¯¹ã¸æºÍĞÂÎÅÍÆ¹ã, ÇëÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ£¡
+del /p /f "%dir%\ldnews.exe"
+rd /s "%appdata%\leidian\cache"
+rd /s "%appdata%\ChangZhi\cache"
+rd /s "%appdata%\ChangZhi2\cache"
+copy .\cache "%appdata%\leidian"
+copy .\cache "%appdata%\ChangZhi"
+copy .\cache "%appdata%\ChangZhi2"
+echo À×µçÄ£ÄâÆ÷ ¾»»¯Íê³É.
+pause

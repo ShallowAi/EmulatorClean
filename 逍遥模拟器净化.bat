@@ -1,0 +1,36 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo               åĞÒ£Ä£ÄâÆ÷ ¾»»¯
+echo               Author: ShallowAi
+echo               52pojie.cn
+echo ****************************************
+echo ÇëÊäÈë åĞÒ£Ä£ÄâÆ÷ °²×°Î»ÖÃ, ²¢ÔËĞĞåĞÒ£Ä£ÄâÆ÷Ä£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı D:\Program Files\Microvirt\MEmu
+set /p dir=°²×°Î»ÖÃ£º
+echo åĞÒ£Ä£ÄâÆ÷°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÂğ£¿
+pause
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÒÑÔËĞĞ!
+pause
+tasklist | find /i "MEmu.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+cd bin
+adb connect 127.0.0.1:21503
+adb remount
+echo ÕıÔÚ½ûÓÃ åĞÒ£Ä£ÄâÆ÷ ÏµÍ³ÍÆ¹ã
+adb shell pm clear com.microvirt.launcher2
+adb shell "echo "127.0.0.1 microvirt.com" >> /etc/hosts"
+adb shell "echo "127.0.0.1 www.microvirt.com" >> /etc/hosts"
+echo ÕıÔÚÉ¾³ı åĞÒ£Ä£ÄâÆ÷ Ó¦ÓÃÉÌµê
+adb shell rm -rf /system/priv-app/Market
+echo ÕıÔÚÉ¾³ı åĞÒ£Ä£ÄâÆ÷ Æô¶¯¹ã¸æ, ÇëÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ!
+rd /s "%dir%\resources\ad"
+rd /s "%dir%\resources\ad2"
+rd /s "%dir%\resources\instruction_ad"
+copy .\ad "%dir%\resources"
+copy .\ad2 "%dir%\resources"
+copy .\instruction_ad "%dir%\resources"
+echo åĞÒ£Ä£ÄâÆ÷ ¾»»¯Íê³É.
+pause

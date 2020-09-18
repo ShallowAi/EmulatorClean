@@ -1,0 +1,34 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo               Mumu ¾»»¯
+echo               Author: ShallowAi
+echo               52pojie.cn
+echo ****************************************
+echo ÇëÊäÈë Mumu °²×°Î»ÖÃ, ²¢ÔËĞĞMumuÄ£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı C:\Program Files (x86)\MuMu
+set /p dir=°²×°Î»ÖÃ£º
+echo Mumu°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÂğ£¿
+pause
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÒÑÔËĞĞ!
+pause
+tasklist | find /i "NemuPlayer.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+cd bin
+adb connect 127.0.0.1:7555
+adb remount
+echo ÕıÔÚÎª Mumu °²×°´¿¾» NovaLauncher ×ÀÃæ
+adb install nova.apk
+echo ÕıÔÚ½ûÓÃ Mumu ÍÆ¹ã×ÀÃæ
+adb shell pm disable com.mumu.launcher
+echo ÕıÔÚ½ûÓÃ Mumu ÍÆ¹ã·şÎñ
+adb shell pm disable com.mumu.acc
+echo ÕıÔÚÉ¾³ı Mumu Ó¦ÓÃÉÌµê
+adb shell rm -rf /system/app/com.mumu.store
+echo ÕıÔÚÉ¾³ı Mumu Æô¶¯¹ã¸æ, ÇëÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ!
+rd /s "%dir%\emulator\nemu\EmulatorShell\adImage"
+copy .\adImage "%dir%\emulator\nemu\EmulatorShell"
+echo Mumu ¾»»¯Íê³É.
+pause

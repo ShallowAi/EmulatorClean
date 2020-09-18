@@ -1,0 +1,33 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo               Ò¹ÉñÄ£ÄâÆ÷ ¾»»¯
+echo               Author: ShallowAi
+echo               52pojie.cn
+echo ****************************************
+echo ÇëÊäÈë Ò¹ÉñÄ£ÄâÆ÷ °²×°Î»ÖÃ, ²¢ÔËĞĞÒ¹ÉñÄ£ÄâÆ÷Ä£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı D:\Program Files\Nox
+set /p dir=°²×°Î»ÖÃ£º
+echo Ò¹ÉñÄ£ÄâÆ÷°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÂğ£¿
+pause
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÒÑÔËĞĞ!
+pause
+tasklist | find /i "Nox.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+copy "bin\nova.apk" "%dir%\bin"
+cd /D "%dir%\bin"
+adb connect 127.0.0.1:62001
+adb remount
+echo ÕıÔÚÎª Ò¹ÉñÄ£ÄâÆ÷ °²×°´¿¾» NovaLauncher ×ÀÃæ
+adb install nova.apk
+echo ÕıÔÚ½ûÓÃ Ò¹ÉñÄ£ÄâÆ÷ ÍÆ¹ã×ÀÃæ
+adb shell pm disable com.vphone.launcher
+echo ÕıÔÚÉ¾³ı Ò¹ÉñÄ£ÄâÆ÷ Ó¦ÓÃÉÌµê
+adb shell rm -rf /system/priv-app/AppStore
+echo ÕıÔÚÉ¾³ı Ò¹ÉñÄ£ÄâÆ÷ Æô¶¯¹ã¸æ, ÇëÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ!
+del /p /f %appdata%\..\Local\Nox\loading\ads
+mkdir %appdata%\..\Local\Nox\loading\ads
+echo Ò¹ÉñÄ£ÄâÆ÷ ¾»»¯Íê³É.
+pause

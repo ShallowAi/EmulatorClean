@@ -30,5 +30,7 @@ adb shell rm -rf /system/app/com.mumu.store
 echo 正在删除 Mumu 启动广告, 请再三确认是否为安装位置!
 rd /s "%dir%\emulator\nemu\EmulatorShell\adImage"
 copy .\adImage "%dir%\emulator\nemu\EmulatorShell"
+echo. > "%dir%\emulator\nemu\EmulatorShell\QtWebEngineProcess.exe"
+echo. > "%dir%\emulator\nemu\EmulatorShell\NemuService.exe"
 echo Mumu 净化完成.
 pause

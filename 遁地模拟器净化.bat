@@ -1,0 +1,34 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo               ¶İµØÄ£ÄâÆ÷ ¾»»¯
+echo               Author: ShallowAi
+echo               52pojie.cn
+echo ****************************************
+echo ÇëÊäÈë ¶İµØÄ£ÄâÆ÷ °²×°Î»ÖÃ, ²¢ÔËĞĞ¶İµØÄ£ÄâÆ÷Ä£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı D:\DundiEmu
+set /p dir=°²×°Î»ÖÃ£º
+echo ¶İµØÄ£ÄâÆ÷°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÂğ£¿
+pause
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÒÑÔËĞĞ!
+pause
+tasklist | find /i "DunDiEmu.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+copy "bin\nova.apk" "%dir%"
+cd /D "%dir%"
+adb connect 127.0.0.1:5555
+adb -s emulator-5554 remount
+echo ÕıÔÚÎª ¶İµØÄ£ÄâÆ÷ °²×°´¿¾» NovaLauncher ×ÀÃæ
+adb -s emulator-5554 install nova.apk
+echo ÕıÔÚ½ûÓÃ ¶İµØÄ£ÄâÆ÷ ÍÆ¹ã×ÀÃæ
+adb -s emulator-5554 shell pm disable com.ddmnq.launcher
+echo ÕıÔÚÉ¾³ı ¶İµØÄ£ÄâÆ÷ Ó¦ÓÃÉÌµê
+adb -s emulator-5554 shell rm -rf /system/priv-app/AppStore
+echo ÕıÔÚÉ¾³ı ¶İµØÄ£ÄâÆ÷ Æô¶¯¹ã¸æ, Çë¹Ø±ÕÄ£ÄâÆ÷ ÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ!
+taskkill /IM DunDiEmu.exe
+rd /s "%dir%\DundiData\cache\resource"
+echo. > "%dir%\DundiData\cache\resource"
+echo ¶İµØÄ£ÄâÆ÷ ¾»»¯Íê³É.
+pause

@@ -8,12 +8,18 @@ echo               52pojie.cn
 echo ****************************************
 echo 请输入 Mumu 安装位置, 并运行Mumu模拟器至加载完成
 echo 例 C:\Program Files (x86)\MuMu
+:retry
 set /p dir=安装位置：
-echo Mumu安装位置是 %dir%, 确认吗？
-pause
+choice /M "Mumu 模拟器安装位置是 %dir%, 确认请输入 Y, 否则请输入 N"
+if errorlevel 2 goto retry
+if errorlevel 1 goto check
+:check
+if exist %dir% goto unexist
+echo 目录不存在, 请重新输入.
+goto retry
 :unexist
-echo 请保证模拟器已运行!
-pause
+echo 请保证模拟器正在运行!
+timeout /t 3
 tasklist | find /i "NemuPlayer.exe" >nul 2>nul && goto exist || goto unexist
 :exist
 cd bin

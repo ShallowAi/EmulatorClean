@@ -8,12 +8,18 @@ echo               52pojie.cn
 echo ****************************************
 echo 请输入 雷电模拟器3 安装位置, 并运行雷电模拟器至加载完成
 echo 例 D:\ChangZhi\dnplayer2
+:retry
 set /p dir=安装位置：
-echo 雷电模拟器安装位置是 %dir%, 确认吗？
-pause
+choice /M "雷电模拟器安装位置是 %dir%, 确认请输入 Y, 否则请输入 N"
+if errorlevel 2 goto retry
+if errorlevel 1 goto check
+:check
+if exist %dir% goto unexist
+echo 目录不存在, 请重新输入.
+goto retry
 :unexist
-echo 请保证模拟器已运行!
-pause
+echo 请保证模拟器正在运行!
+timeout /t 3
 tasklist | find /i "dnplayer.exe" >nul 2>nul && goto exist || goto unexist
 :exist
 cd bin
@@ -25,15 +31,18 @@ echo 正在禁用 雷电模拟器 推广桌面
 adb -s emulator-5554 shell pm disable com.android.launcher3
 echo 正在卸载 雷电模拟器 应用商店
 adb -s emulator-5554 shell rm -rf /system/priv-app/ldAppStore
-echo 请关闭正在运行的模拟器.
+echo 即将关闭正在运行的模拟器.
 taskkill /f /im dnplayer.exe
 echo 正在删除并禁用 雷电模拟器 启动广告和新闻推广, 请再三确认是否为安装位置！
 del /p /f "%dir%\ldnews.exe"
+mkdir "%dir%\ldnews.exe"
 rd /s "%appdata%\leidian\cache"
+rd /s "%appdata%\leidian64\cache"
 rd /s "%appdata%\ChangZhi\cache"
 rd /s "%appdata%\ChangZhi2\cache"
-copy .\cache "%appdata%\leidian"
-copy .\cache "%appdata%\ChangZhi"
-copy .\cache "%appdata%\ChangZhi2"
+echo. > "%appdata%\leidian\cache"
+echo. > "%appdata%\leidian64\cache"
+echo. > "%appdata%\ChangZhi\cache"
+echo. > "%appdata%\ChangZhi2\cache"
 echo 雷电模拟器 净化完成.
 pause

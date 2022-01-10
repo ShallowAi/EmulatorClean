@@ -8,12 +8,18 @@ echo               52pojie.cn
 echo ****************************************
 echo 请输入 夜神模拟器 安装位置, 并运行夜神模拟器模拟器至加载完成
 echo 例 D:\Program Files\Nox
+:retry
 set /p dir=安装位置：
-echo 夜神模拟器安装位置是 %dir%, 确认吗？
-pause
+choice /M "夜神模拟器安装位置是 %dir%, 确认请输入 Y, 否则请输入 N"
+if errorlevel 2 goto retry
+if errorlevel 1 goto check
+:check
+if exist %dir% goto unexist
+echo 目录不存在, 请重新输入.
+goto retry
 :unexist
-echo 请保证模拟器已运行!
-pause
+echo 请保证模拟器正在运行!
+timeout /t 3
 tasklist | find /i "Nox.exe" >nul 2>nul && goto exist || goto unexist
 :exist
 copy "bin\nova.apk" "%dir%\bin"

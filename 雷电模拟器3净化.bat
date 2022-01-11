@@ -30,6 +30,7 @@ adb -s emulator-5554 install nova.apk
 echo 正在禁用 雷电模拟器 推广桌面
 adb -s emulator-5554 shell pm disable com.android.launcher3
 echo 正在卸载 雷电模拟器 应用商店
+adb -s emulator-5554 shell pm disable com.android.ld.appstore
 adb -s emulator-5554 shell rm -rf /system/priv-app/ldAppStore
 echo 即将关闭正在运行的模拟器.
 taskkill /f /im dnplayer.exe

@@ -14,7 +14,7 @@ choice /M "遁地模拟器安装位置是 %dir%, 确认请输入 Y, 否则请输入 N"
 if errorlevel 2 goto retry
 if errorlevel 1 goto check
 :check
-if exist %dir% goto unexist
+if exist "%dir%" goto unexist
 echo 目录不存在, 请重新输入.
 goto retry
 :unexist

@@ -30,10 +30,13 @@ echo 正在为 夜神模拟器 安装纯净 NovaLauncher 桌面
 adb install nova.apk
 echo 正在禁用 夜神模拟器 推广桌面
 adb shell pm disable com.vphone.launcher
-echo 正在删除 夜神模拟器 应用商店
+adb shell pm disable com.android.launcher3
+echo 正在删除 夜神模拟器 应用商店/游戏中心
 adb shell rm -rf /system/priv-app/AppStore
+echo 正在禁用 夜神模拟器 帮助
+adb shell pm disable com.android.calculator2
 echo 正在删除 夜神模拟器 启动广告, 请再三确认是否为安装位置!
-del /p /f %appdata%\..\Local\Nox\loading\ads
-mkdir %appdata%\..\Local\Nox\loading\ads
+del /p /f %appdata%\..\Local\Nox\loading
+echo. > "%appdata%\..\Local\Nox\loading"
 echo 夜神模拟器 净化完成.
 pause

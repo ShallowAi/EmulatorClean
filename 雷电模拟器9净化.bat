@@ -1,0 +1,51 @@
+ÿş
+cls
+@echo off
+echo ****************************************
+echo.
+echo               À×µçÄ£ÄâÆ÷9 ¾»»¯
+echo               Author: ShallowAi
+echo.
+echo ****************************************
+echo ÇëÊäÈë À×µçÄ£ÄâÆ÷9 °²×°Î»ÖÃ, ²¢ÔËĞĞÀ×µçÄ£ÄâÆ÷ÖÁ¼ÓÔØÍê³É
+echo Àı D:\leidian\LDPlayer9
+:retry
+set /p dir=°²×°Î»ÖÃ£º
+choice /M "À×µçÄ£ÄâÆ÷°²×°Î»ÖÃÊÇ %dir%, È·ÈÏÇëÊäÈë Y, ·ñÔòÇëÊäÈë N"
+if errorlevel 2 goto retry
+if errorlevel 1 goto check
+:check
+if exist "%dir%" goto unexist
+echo Ä¿Â¼²»´æÔÚ, ÇëÖØĞÂÊäÈë.
+goto retry
+:unexist
+echo Çë±£Ö¤Ä£ÄâÆ÷ÕıÔÚÔËĞĞ!
+timeout /t 3
+tasklist | find /i "dnplayer.exe" >nul 2>nul && goto exist || goto unexist
+:exist
+cd bin
+adb connect 127.0.0.1:5555
+echo ÕıÔÚÎª À×µçÄ£ÄâÆ÷ °²×°´¿¾» NovaLauncher ×ÀÃæ
+adb -s emulator-5554 install nova.apk
+echo ÕıÔÚ½ûÓÃ À×µçÄ£ÄâÆ÷ ÍÆ¹ã×ÀÃæ
+adb -s emulator-5554 shell pm disable-user com.android.launcher3
+adb -s emulator-5554 shell pm disable-user com.ldmnq.launcher3
+echo ÕıÔÚĞ¶ÔØ À×µçÄ£ÄâÆ÷ Ó¦ÓÃÉÌµê
+adb -s emulator-5554 shell pm uninstall --user 0 com.android.flysilkworm
+echo ¼´½«¹Ø±ÕÕıÔÚÔËĞĞµÄÄ£ÄâÆ÷.
+taskkill /f /im dnplayer.exe
+echo ÕıÔÚÉ¾³ı²¢½ûÓÃ À×µçÄ£ÄâÆ÷ Æô¶¯¹ã¸æºÍĞÂÎÅÍÆ¹ã, ÇëÔÙÈıÈ·ÈÏÊÇ·ñÎª°²×°Î»ÖÃ£¡
+del /p /f "%dir%\ldnews.exe"
+mkdir "%dir%\ldnews.exe"
+rd /s "%appdata%\leidian\cache"
+rd /s "%appdata%\leidian64\cache"
+rd /s "%appdata%\leidian9\cache"
+rd /s "%appdata%\ChangZhi\cache"
+rd /s "%appdata%\ChangZhi2\cache"
+echo. > "%appdata%\leidian\cache"
+echo. > "%appdata%\leidian64\cache"
+echo. > "%appdata%\leidian9\cache"
+echo. > "%appdata%\ChangZhi\cache"
+echo. > "%appdata%\ChangZhi2\cache"
+echo À×µçÄ£ÄâÆ÷ ¾»»¯Íê³É.
+pause
